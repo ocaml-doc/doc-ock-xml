@@ -225,7 +225,7 @@ type_resolved_path:
   | TYPE md = module_resolved_path data = Data CLOSE
       { DocOckPaths.Path.Resolved.Type(md, data) }
   | cltyp = class_type_resolved_path
-      { DocOckPaths.Path.Resolved.type_of_class_type cltyp }
+      { DocOckPaths.Path.Resolved.type_of_class_signature cltyp }
 
 class_resolved_path:
   | IDENTIFIER id = class_identifier CLOSE
@@ -239,7 +239,7 @@ class_type_resolved_path:
   | CLASS_TYPE md = module_resolved_path data = Data CLOSE
       { DocOckPaths.Path.Resolved.ClassType(md, data) }
   | cl = class_resolved_path
-      { DocOckPaths.Path.Resolved.class_type_of_class cl }
+      { DocOckPaths.Path.Resolved.class_signature_of_class cl }
 
 module_path:
   | RESOLVED path = module_resolved_path CLOSE
@@ -333,7 +333,7 @@ type_resolved_reference:
   | typ = datatype_resolved_reference
       { DocOckPaths.Reference.Resolved.type_of_datatype typ }
   | cltyp = class_type_resolved_reference
-      { DocOckPaths.Reference.Resolved.type_of_class_type cltyp }
+      { DocOckPaths.Reference.Resolved.type_of_class_signature cltyp }
 
 constructor_resolved_reference:
   | IDENTIFIER id = constructor_identifier CLOSE
@@ -341,7 +341,7 @@ constructor_resolved_reference:
   | CONSTRUCTOR sg = datatype_resolved_reference data = Data CLOSE
       { DocOckPaths.Reference.Resolved.Constructor(sg, data) }
   | ext = extension_resolved_reference
-      { DocOckPaths.Reference.Resolved.constructor_of_extension ext }
+      { DocOckPaths.Reference.Resolved.constructor_of_type_extension ext }
 
 field_resolved_reference:
   | IDENTIFIER id = field_identifier CLOSE
@@ -355,7 +355,7 @@ extension_resolved_reference:
   | EXTENSION sg = signature_resolved_reference data = Data CLOSE
       { DocOckPaths.Reference.Resolved.Extension(sg, data) }
   | exn = exception_resolved_reference
-      { DocOckPaths.Reference.Resolved.extension_of_exception exn}
+      { DocOckPaths.Reference.Resolved.type_extension_of_exception exn}
 
 exception_resolved_reference:
   | IDENTIFIER id = exception_identifier CLOSE
@@ -381,7 +381,7 @@ class_type_resolved_reference:
   | CLASS_TYPE sg = signature_resolved_reference data = Data CLOSE
       { DocOckPaths.Reference.Resolved.ClassType(sg, data) }
   | cl = class_resolved_reference
-      { DocOckPaths.Reference.Resolved.class_type_of_class cl }
+      { DocOckPaths.Reference.Resolved.class_signature_of_class cl }
 
 method_resolved_reference:
   | IDENTIFIER id = method_identifier CLOSE
@@ -553,7 +553,7 @@ reference:
   | CLASS rf = class_reference CLOSE
       { DocOckTypes.Documentation.Class rf }
   | CLASS_TYPE rf = class_type_reference CLOSE
-      { DocOckTypes.Documentation.ClassType rf }
+      { DocOckTypes.Documentation.ClassSignature rf }
   | METHOD rf = method_reference CLOSE
       { DocOckTypes.Documentation.Method rf }
   | INSTANCE_VARIABLE rf = instance_variable_reference CLOSE
