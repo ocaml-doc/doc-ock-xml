@@ -539,7 +539,7 @@ let doc_reference_p base output rf =
     | Exception rf -> reference exception_t rf
     | Value rf -> reference value_t rf
     | Class rf -> reference class_t rf
-    | ClassType rf -> reference class_type_t rf
+    | ClassSignature rf -> reference class_type_t rf
     | Method rf -> reference method_t rf
     | InstanceVariable rf -> reference instance_variable_t rf
     | Element rf -> reference element_t rf
