@@ -862,9 +862,15 @@ object_method:
   | name = name type_ = type_expr
       { TypeExpr.Object.{name; type_} }
 
+object_field:
+  | METHOD m = object_method CLOSE
+      { TypeExpr.Object.Method m }
+  | INHERIT t = type_expr CLOSE
+      { TypeExpr.Object.Inherit t }
+
 object_:
-  | methods = object_method* open_ = flag(OPEN)
-      { TypeExpr.Object.{methods; open_} }
+  | fields = object_field* open_ = flag(OPEN)
+      { TypeExpr.Object.{fields; open_} }
 
 package_substitution:
   | frag = type_fragment expr = type_expr

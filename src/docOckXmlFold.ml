@@ -969,6 +969,17 @@ and object_method_p base output acc m =
   let acc = name_p base output acc m.name in
   type_expr_p base output acc m.type_
 
+and object_field_p base output acc =
+  let open TypeExpr.Object in function
+    | Method m ->
+      let acc = method_t output acc in
+      let acc = object_method_p base output acc m in
+      close output acc
+    | Inherit typ ->
+      let acc = inherit_t output acc in
+      let acc = type_expr_p base output acc typ in
+      close output acc
+
 and package_substitution_p base output acc (frag, expr) =
   let acc = fragment_p base output acc frag in
   type_expr_p base output acc expr
@@ -1011,7 +1022,7 @@ and type_expr_p base output acc =
     | Object obj ->
       let open Object in
       let acc = object_t output acc in
-      let acc = list object_method_p base output acc obj.methods in
+      let acc = list object_field_p base output acc obj.fields in
       let acc = flag open_t output acc obj.open_ in
       close output acc
     | Class(p, params) ->
