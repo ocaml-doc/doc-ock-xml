@@ -1,6 +1,6 @@
 Doc-ock-xml — XML printer and parser for Doc-Ock
 ------------------------------------------------
-%%VERSION%%
+v1.2.0
 
 Doc-ock-xml is an XML printer and parser for [Doc-ock][doc-ock]
 
