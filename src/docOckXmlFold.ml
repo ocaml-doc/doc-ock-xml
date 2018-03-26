@@ -1234,11 +1234,10 @@ and substitution_p base output acc =
       let acc = fragment_p base output acc frag in
       let acc = type_equation_p base output acc eq in
       close output acc
-    | TypeSubst(frag, params, p) ->
+    | TypeSubst(frag, eq) ->
       let acc = type_subst_t output acc in
       let acc = fragment_p base output acc frag in
-      let acc = list type_subst_parameter_p base output acc params in
-      let acc = path_p base output acc p in
+      let acc = type_equation_p base output acc eq in
       close output acc
 
 and module_argument_p base output acc = function
