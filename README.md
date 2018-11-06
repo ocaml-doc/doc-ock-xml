@@ -1,3 +1,8 @@
+**Note:** this repo is inactive. The code here was part of odoc, whose
+development continues at [https://github.com/ocaml/odoc][odoc].
+
+[odoc]: https://github.com/ocaml/odoc
+
 Doc-ock-xml — XML printer and parser for Doc-Ock
 ------------------------------------------------
 %%VERSION%%
